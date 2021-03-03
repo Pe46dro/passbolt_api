@@ -213,8 +213,8 @@ class SendTestEmailTask extends AppShell
     {
         $transportConfig = TransportFactory::getConfig('default');
         $usernameClear = $transportConfig['username'];
-        $usernameEncoded = base64_encode($transportConfig['username']);
-        $passwordClear = base64_encode($transportConfig['password']);
+        $usernameEncoded = base64_encode($transportConfig['username']??'');
+        $passwordClear = base64_encode($transportConfig['password']??'');
         $passwordEncoded = $transportConfig['password'];
         $replaced = str_replace(
             [$usernameClear, $usernameEncoded, $passwordClear, $passwordEncoded],
@@ -232,7 +232,7 @@ class SendTestEmailTask extends AppShell
      */
     protected function _getDefaultMessage()
     {
-        $message = "Congratulations!\n" .
+        $message = 'Congratulations!\n' .
         'If you receive this email, it means that your passbolt smtp configuration is working fine.';
 
         return $message;
